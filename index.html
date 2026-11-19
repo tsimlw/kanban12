@@ -1,97 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-type="software" data-radius="sharp">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IT PMO — Kanban Project Board</title>
+  <meta name="description" content="UOB IT PMO Delivery & Portfolio Kanban Board for tracking banking technology workstreams, blockers, and releases." />
+  <meta name="theme-color" content="#00205B" />
+  <title>UOB IT PMO — Delivery &amp; Portfolio Kanban</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2300205B'/%3E%3Cg fill='%23ED1C24'%3E%3Crect x='5' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='10' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='14.7' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='19.4' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='24.4' y='6' width='2.6' height='20' rx='1'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* =====================================================================
-       1. DESIGN TOKENS (CORPORATE BLUE PALETTE & SPACING SCALE)
+       1. DESIGN TOKENS — UOB INSTITUTIONAL PALETTE & ARCHITECTURAL SCALE
        ===================================================================== */
     :root {
-      /* Corporate Blue Palette */
-      --navy-950: #091d36;
-      --navy-900: #0f294a;
-      --navy-800: #163a68;
-      --blue-700: #1d4ed8;
-      --blue-600: #2563eb;
-      --blue-500: #3b82f6;
-      --blue-100: #dbeafe;
-      --blue-50: #eff6ff;
+      /* UOB Institutional Brand Palette */
+      --uob-navy-950: #00153d;
+      --uob-navy-900: #00205b;
+      --uob-navy-800: #002e7a;
+      --uob-blue-700: #003da5;
+      --uob-blue-600: #0052cc;
+      --uob-blue-100: #e6eefc;
+      --uob-blue-50: #f2f6fe;
 
-      /* Neutrals */
-      --slate-900: #0f172a;
-      --slate-800: #1e293b;
-      --slate-700: #334155;
-      --slate-600: #475569;
-      --slate-500: #64748b;
-      --slate-400: #94a3b8;
-      --slate-300: #cbd5e1;
-      --slate-200: #e2e8f0;
-      --slate-100: #f1f5f9;
-      --slate-50: #f8fafc;
-      --white: #ffffff;
+      --uob-red-600: #ed1c24;
+      --uob-red-700: #c81018;
+      --uob-red-100: #fde8e9;
+      --uob-red-50: #fff5f5;
 
-      /* Semantic / Priority Colours */
-      --critical-border: #dc2626;
+      /* Architectural Neutrals */
+      --ink-950: #0b1220;
+      --ink-900: #111827;
+      --ink-700: #334155;
+      --ink-600: #475569;
+      --ink-500: #64748b;
+      --ink-400: #94a3b8;
+
+      --line-300: #cbd5e1;
+      --line-200: #e2e6ec;
+      --line-100: #eef1f5;
+
+      --ground: #f5f7fa;
+      --surface: #ffffff;
+      --surface-subtle: #f8f9fb;
+      --column-bg: #eef2f7;
+
+      /* Semantic Status & Priority Tokens */
+      --critical-border: #d91920;
       --critical-bg: #fef2f2;
       --critical-text: #991b1b;
 
-      --high-border: #d97706;
+      --high-border: #c26d00;
       --high-bg: #fffbeb;
       --high-text: #92400e;
 
-      --medium-border: #2563eb;
-      --medium-bg: #eff6ff;
-      --medium-text: #1e40af;
+      --medium-border: #003da5;
+      --medium-bg: #eef4ff;
+      --medium-text: #002e7a;
 
       --low-border: #64748b;
       --low-bg: #f1f5f9;
       --low-text: #334155;
 
+      --success-border: #059669;
       --success-bg: #ecfdf5;
-      --success-border: #10b981;
       --success-text: #065f46;
 
+      --warning-border: #d97706;
       --warning-bg: #fffbeb;
-      --warning-border: #f59e0b;
       --warning-text: #92400e;
 
+      --danger-border: #f5c2c4;
       --danger-bg: #fef2f2;
-      --danger-border: #fecaca;
       --danger-text: #b91c1c;
 
       /* Typography */
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, monospace;
 
-      /* Spacing Scale */
-      --space-1: 0.25rem;
-      --space-2: 0.5rem;
-      --space-3: 0.75rem;
-      --space-4: 1rem;
-      --space-5: 1.25rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
+      /* Layout & Spacing */
+      --container-max: 1440px;
+      --gutter: 24px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
 
-      /* Radii & Shadows */
+      /* Sharp Architectural Radii */
+      --radius-xs: 2px;
       --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --radius-full: 9999px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
 
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-      --shadow-md: 0 4px 10px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 16px 36px rgba(9, 29, 54, 0.22);
+      /* Elevation & Motion */
+      --shadow-xs: 0 1px 2px rgba(0, 21, 61, 0.04);
+      --shadow-sm: 0 2px 6px rgba(0, 21, 61, 0.06);
+      --shadow-md: 0 8px 20px rgba(0, 21, 61, 0.1);
+      --shadow-lg: 0 20px 44px rgba(0, 21, 61, 0.22);
 
-      /* Focus Ring */
-      --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.35);
+      --focus-ring: 0 0 0 3px rgba(0, 61, 165, 0.28);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* =====================================================================
-       2. RESET & BASE STYLES
+       2. RESET, ACCESSIBILITY & ENTRANCE MOTION
        ===================================================================== */
     *,
     *::before,
@@ -106,10 +124,17 @@
       min-height: 100%;
       font-family: var(--font-sans);
       font-size: 14px;
-      line-height: 1.45;
-      color: var(--slate-900);
-      background-color: var(--slate-100);
+      line-height: 1.5;
+      color: var(--ink-900);
+      background-color: var(--ground);
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     button,
@@ -125,9 +150,29 @@
     }
 
     :focus-visible {
-      outline: 2px solid var(--blue-600);
+      outline: 2px solid var(--uob-blue-700);
       outline-offset: 2px;
       box-shadow: var(--focus-ring);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: var(--gutter);
+      top: -64px;
+      z-index: 2000;
+      padding: 10px 16px;
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: top 0.15s var(--ease-out);
+    }
+
+    .skip-link:focus {
+      top: 12px;
     }
 
     .sr-only {
@@ -142,183 +187,319 @@
       border: 0;
     }
 
+    .wrap {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    @keyframes surface-enter {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    [data-enter] {
+      animation: surface-enter 0.35s var(--ease-out) both;
+    }
+
     /* =====================================================================
-       3. HEADER & LIVE SUMMARY STRIP
+       3. TOP NAVIGATION BAR (UOB INSTITUTIONAL HEADER)
        ===================================================================== */
+    .top-accent {
+      height: 3px;
+      background: var(--uob-red-600);
+      width: 100%;
+    }
+
     .app-header {
-      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-800) 100%);
-      color: var(--white);
+      background: var(--uob-navy-900);
+      color: #ffffff;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .header-inner {
-      max-width: 1520px;
-      margin: 0 auto;
-      padding: var(--space-4) var(--space-6);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-4);
-    }
-
-    .header-top {
+    .header-bar {
+      min-height: 68px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: var(--space-4);
+      padding-top: var(--space-3);
+      padding-bottom: var(--space-3);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: var(--space-4);
+      min-width: 0;
     }
 
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+    .uob-logo-lockup {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 10px;
       flex-shrink: 0;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .uob-logo-svg {
+      display: block;
+      height: 30px;
+      width: auto;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.22);
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
     }
 
     .brand-title {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: 1.02rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 1.2;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: #ffffff;
     }
 
     .brand-subtitle {
       margin: 0;
-      font-size: 0.78rem;
-      color: var(--blue-100);
-      opacity: 0.9;
+      font-size: 0.76rem;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.3;
     }
 
     .header-actions {
       display: flex;
       align-items: center;
       gap: var(--space-3);
+      flex-shrink: 0;
     }
 
+    .env-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.86);
+      white-space: nowrap;
+    }
+
+    .env-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      flex-shrink: 0;
+    }
+
+    /* Buttons — Unified Sharp System */
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
-      background-color: var(--blue-600);
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-md);
-      padding: var(--space-2) var(--space-4);
+      justify-content: center;
+      gap: 6px;
+      height: 38px;
+      padding: 0 16px;
+      background: var(--uob-red-600);
+      color: #ffffff;
+      border: 1px solid var(--uob-red-600);
+      border-radius: var(--radius-sm);
       font-weight: 600;
-      font-size: 0.9rem;
-      transition: background-color 0.15s ease, transform 0.1s ease;
+      font-size: 0.86rem;
+      letter-spacing: 0.01em;
+      transition: background-color 0.15s var(--ease-out),
+        border-color 0.15s var(--ease-out),
+        transform 0.12s var(--ease-out);
     }
 
     .btn-primary:hover:not(:disabled) {
-      background-color: var(--blue-700);
+      background: var(--uob-red-700);
+      border-color: var(--uob-red-700);
+      transform: translateY(-1px);
     }
 
     .btn-primary:active:not(:disabled) {
-      transform: translateY(1px);
+      transform: translateY(0);
     }
 
     .btn-primary:disabled {
-      opacity: 0.65;
+      opacity: 0.6;
       cursor: not-allowed;
+    }
+
+    .btn-primary--navy {
+      background: var(--uob-navy-900);
+      border-color: var(--uob-navy-900);
+    }
+
+    .btn-primary--navy:hover:not(:disabled) {
+      background: var(--uob-blue-700);
+      border-color: var(--uob-blue-700);
     }
 
     .btn-secondary {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-1);
-      background-color: var(--white);
-      color: var(--slate-700);
-      border: 1px solid var(--slate-300);
-      border-radius: var(--radius-md);
-      padding: var(--space-2) var(--space-3);
+      justify-content: center;
+      gap: 6px;
+      height: 38px;
+      padding: 0 14px;
+      background: var(--surface);
+      color: var(--ink-700);
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-sm);
       font-weight: 500;
-      font-size: 0.85rem;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      font-size: 0.84rem;
+      transition: background-color 0.15s var(--ease-out),
+        border-color 0.15s var(--ease-out),
+        color 0.15s var(--ease-out),
+        transform 0.12s var(--ease-out);
     }
 
     .btn-secondary:hover {
-      background-color: var(--slate-50);
-      border-color: var(--slate-400);
+      background: var(--surface-subtle);
+      border-color: var(--uob-navy-800);
+      color: var(--uob-navy-900);
+      transform: translateY(-1px);
     }
 
-    /* Summary Strip */
-    .summary-strip {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-2);
-      padding-top: var(--space-3);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .summary-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: var(--radius-full);
-      padding: 0.28rem 0.75rem;
-      font-size: 0.8rem;
-      color: var(--blue-100);
-    }
-
-    .summary-pill strong {
-      color: var(--white);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .summary-pill--overdue {
-      background: rgba(220, 38, 38, 0.24);
-      border-color: rgba(248, 113, 113, 0.5);
-      color: #fee2e2;
-    }
-
-    .summary-pill--overdue strong {
-      color: #ffffff;
-    }
-
-    .demo-note {
-      margin-left: auto;
-      font-size: 0.76rem;
-      color: rgba(219, 234, 254, 0.85);
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-1);
+    .btn-secondary:active {
+      transform: translateY(0);
     }
 
     /* =====================================================================
-       4. MAIN WORKSPACE & FILTER BAR
+       4. PORTFOLIO KPI SUMMARY BAND
+       ===================================================================== */
+    .kpi-band {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line-200);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border-left: 1px solid var(--line-200);
+    }
+
+    .kpi-cell {
+      padding: 14px 16px;
+      border-right: 1px solid var(--line-200);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: var(--surface);
+      transition: background-color 0.15s var(--ease-out);
+    }
+
+    .kpi-cell:hover {
+      background: var(--surface-subtle);
+    }
+
+    .kpi-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kpi-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .kpi-dot--total { background: var(--uob-navy-900); }
+    .kpi-dot--backlog { background: var(--ink-400); }
+    .kpi-dot--in-progress { background: var(--uob-blue-700); }
+    .kpi-dot--blocked { background: var(--uob-red-600); }
+    .kpi-dot--done { background: var(--success-border); }
+    .kpi-dot--overdue { background: var(--uob-red-600); }
+
+    .kpi-value-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .kpi-value {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink-950);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-sub {
+      font-size: 0.72rem;
+      color: var(--ink-500);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-cell--overdue-alert {
+      background: var(--uob-red-50);
+    }
+
+    .kpi-cell--overdue-alert .kpi-label,
+    .kpi-cell--overdue-alert .kpi-value {
+      color: var(--critical-text);
+    }
+
+    /* =====================================================================
+       5. MAIN WORKSPACE & FILTER BAR
        ===================================================================== */
     .app-main {
-      max-width: 1520px;
-      margin: 0 auto;
-      padding: var(--space-5) var(--space-6) var(--space-8);
+      flex: 1;
+      padding-top: var(--space-5);
+      padding-bottom: var(--space-8);
+    }
+
+    .workspace-stack {
       display: flex;
       flex-direction: column;
       gap: var(--space-5);
     }
 
     .filter-bar {
-      background: var(--white);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4);
-      box-shadow: var(--shadow-sm);
+      background: var(--surface);
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-xs);
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
@@ -328,34 +509,35 @@
     .filter-group {
       display: flex;
       flex-direction: column;
-      gap: var(--space-1);
-      min-width: 190px;
+      gap: 5px;
+      min-width: 185px;
       flex: 1 1 200px;
     }
 
     .filter-group label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--slate-600);
+      letter-spacing: 0.05em;
+      color: var(--ink-600);
     }
 
     .filter-group input,
     .filter-group select {
-      height: 36px;
-      padding: 0 var(--space-3);
-      border: 1px solid var(--slate-300);
-      border-radius: var(--radius-md);
-      background-color: var(--white);
-      color: var(--slate-900);
-      font-size: 0.875rem;
-      transition: border-color 0.15s ease;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      color: var(--ink-900);
+      font-size: 0.86rem;
+      transition: border-color 0.15s var(--ease-out),
+        box-shadow 0.15s var(--ease-out);
     }
 
     .filter-group input:hover,
     .filter-group select:hover {
-      border-color: var(--slate-400);
+      border-color: var(--ink-400);
     }
 
     .filter-actions {
@@ -367,12 +549,14 @@
 
     .filter-status {
       font-size: 0.8rem;
-      color: var(--slate-500);
+      font-weight: 500;
+      color: var(--ink-500);
       white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
 
     /* =====================================================================
-       5. KANBAN BOARD & COLUMNS
+       6. KANBAN BOARD & COLUMNS
        ===================================================================== */
     .kanban-board {
       display: grid;
@@ -382,24 +566,42 @@
     }
 
     .kanban-column {
-      background: var(--slate-200);
-      background-color: #e9eff6;
-      border: 2px solid transparent;
-      border-radius: var(--radius-lg);
+      background: var(--column-bg);
+      border: 1px solid var(--line-200);
+      border-top: 3px solid var(--ink-400);
+      border-radius: var(--radius-md);
       padding: var(--space-3);
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
-      min-height: 460px;
-      transition: background-color 0.15s ease, border-color 0.15s ease,
-        box-shadow 0.15s ease;
+      min-height: 480px;
+      transition: background-color 0.15s var(--ease-out),
+        border-color 0.15s var(--ease-out),
+        box-shadow 0.15s var(--ease-out);
+    }
+
+    .kanban-column[data-column-status="Backlog"] {
+      border-top-color: var(--ink-500);
+    }
+
+    .kanban-column[data-column-status="In Progress"] {
+      border-top-color: var(--uob-blue-700);
+    }
+
+    .kanban-column[data-column-status="Blocked"] {
+      border-top-color: var(--uob-red-600);
+    }
+
+    .kanban-column[data-column-status="Done"] {
+      border-top-color: var(--success-border);
     }
 
     .kanban-column--drop-active {
-      background-color: var(--blue-50);
-      border-color: var(--blue-600);
+      background-color: var(--uob-blue-50);
+      border-color: var(--uob-blue-700);
       border-style: dashed;
-      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.15);
+      border-top-style: solid;
+      box-shadow: inset 0 0 0 1px rgba(0, 61, 165, 0.18);
     }
 
     .column-header {
@@ -407,8 +609,8 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: var(--space-2);
-      padding: var(--space-1) var(--space-1) var(--space-2);
-      border-bottom: 1px solid var(--slate-300);
+      padding: 2px 2px 10px;
+      border-bottom: 1px solid var(--line-300);
     }
 
     .column-title-wrap {
@@ -419,42 +621,33 @@
 
     .column-title {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
-      color: var(--navy-900);
+      color: var(--uob-navy-950);
+      letter-spacing: -0.01em;
       display: flex;
       align-items: center;
-      gap: var(--space-2);
+      gap: 7px;
     }
 
     .column-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: var(--radius-full);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
       display: inline-block;
       flex-shrink: 0;
     }
 
-    .column-dot--backlog {
-      background-color: var(--slate-500);
-    }
-
-    .column-dot--in-progress {
-      background-color: var(--blue-600);
-    }
-
-    .column-dot--blocked {
-      background-color: var(--critical-border);
-    }
-
-    .column-dot--done {
-      background-color: var(--success-border);
-    }
+    .column-dot--backlog { background-color: var(--ink-500); }
+    .column-dot--in-progress { background-color: var(--uob-blue-700); }
+    .column-dot--blocked { background-color: var(--uob-red-600); }
+    .column-dot--done { background-color: var(--success-border); }
 
     .column-subtitle {
       margin: 0;
       font-size: 0.72rem;
-      color: var(--slate-600);
+      color: var(--ink-500);
+      line-height: 1.35;
     }
 
     .column-count {
@@ -462,14 +655,15 @@
       align-items: center;
       justify-content: center;
       min-width: 26px;
-      height: 24px;
-      padding: 0 var(--space-2);
-      border-radius: var(--radius-full);
-      background-color: var(--white);
-      border: 1px solid var(--slate-300);
-      color: var(--navy-900);
-      font-size: 0.78rem;
-      font-weight: 700;
+      height: 22px;
+      padding: 0 7px;
+      border-radius: var(--radius-xs);
+      background-color: var(--surface);
+      border: 1px solid var(--line-300);
+      color: var(--uob-navy-900);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
       font-variant-numeric: tabular-nums;
       flex-shrink: 0;
     }
@@ -477,43 +671,49 @@
     .column-cards {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: 10px;
       flex: 1;
     }
 
     .column-empty {
-      padding: var(--space-6) var(--space-3);
+      padding: 28px 14px;
       text-align: center;
-      color: var(--slate-500);
-      font-size: 0.82rem;
-      border: 1px dashed var(--slate-300);
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.45);
+      color: var(--ink-500);
+      font-size: 0.8rem;
+      border: 1px dashed var(--line-300);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.55);
     }
 
     /* =====================================================================
-       6. TASK CARDS
+       7. TASK CARDS
        ===================================================================== */
     .task-card {
-      background: var(--white);
-      border: 1px solid var(--slate-200);
-      border-left: 4px solid var(--medium-border);
-      border-radius: var(--radius-md);
-      padding: var(--space-3);
-      box-shadow: var(--shadow-sm);
+      background: var(--surface);
+      border: 1px solid var(--line-200);
+      border-left: 3px solid var(--medium-border);
+      border-radius: var(--radius-sm);
+      padding: 13px 14px;
+      box-shadow: var(--shadow-xs);
       display: flex;
       flex-direction: column;
-      gap: var(--space-2);
+      gap: 9px;
       cursor: grab;
-      transition: box-shadow 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+      transition: transform 0.16s var(--ease-out),
+        box-shadow 0.16s var(--ease-out),
+        border-color 0.16s var(--ease-out),
+        opacity 0.15s ease;
     }
 
     .task-card:hover {
+      transform: translateY(-2px);
       box-shadow: var(--shadow-md);
+      border-color: var(--line-300);
     }
 
     .task-card:active {
       cursor: grabbing;
+      transform: translateY(0);
     }
 
     .task-card--dragging {
@@ -521,21 +721,10 @@
       transform: scale(0.98);
     }
 
-    .task-card--priority-critical {
-      border-left-color: var(--critical-border);
-    }
-
-    .task-card--priority-high {
-      border-left-color: var(--high-border);
-    }
-
-    .task-card--priority-medium {
-      border-left-color: var(--medium-border);
-    }
-
-    .task-card--priority-low {
-      border-left-color: var(--low-border);
-    }
+    .task-card--priority-critical { border-left-color: var(--critical-border); }
+    .task-card--priority-high { border-left-color: var(--high-border); }
+    .task-card--priority-medium { border-left-color: var(--medium-border); }
+    .task-card--priority-low { border-left-color: var(--low-border); }
 
     .card-top {
       display: flex;
@@ -548,23 +737,25 @@
       font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--slate-500);
+      color: var(--ink-500);
       letter-spacing: 0.02em;
     }
 
     .card-delete-btn {
-      width: 24px;
-      height: 24px;
-      border-radius: var(--radius-sm);
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-xs);
       border: 1px solid transparent;
       background: transparent;
-      color: var(--slate-400);
+      color: var(--ink-400);
       font-size: 1rem;
       line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.15s ease, color 0.15s ease;
+      transition: background-color 0.14s var(--ease-out),
+        color 0.14s var(--ease-out),
+        border-color 0.14s var(--ease-out);
     }
 
     .card-delete-btn:hover {
@@ -575,18 +766,19 @@
 
     .card-title {
       margin: 0;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      color: var(--slate-900);
-      line-height: 1.35;
+      color: var(--ink-950);
+      line-height: 1.38;
+      letter-spacing: -0.01em;
       word-break: break-word;
     }
 
     .card-desc {
       margin: 0;
       font-size: 0.78rem;
-      color: var(--slate-600);
-      line-height: 1.4;
+      color: var(--ink-600);
+      line-height: 1.45;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -598,66 +790,67 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: var(--radius-xs);
+      font-size: 0.69rem;
       font-weight: 600;
-      line-height: 1.3;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
       border: 1px solid transparent;
     }
 
     .badge--priority-critical {
       background: var(--critical-bg);
       color: var(--critical-text);
-      border-color: #fecaca;
+      border-color: #f8c7c9;
     }
 
     .badge--priority-high {
       background: var(--high-bg);
       color: var(--high-text);
-      border-color: #fde68a;
+      border-color: #f7dfa3;
     }
 
     .badge--priority-medium {
       background: var(--medium-bg);
       color: var(--medium-text);
-      border-color: #bfdbfe;
+      border-color: #c8dafb;
     }
 
     .badge--priority-low {
       background: var(--low-bg);
       color: var(--low-text);
-      border-color: var(--slate-300);
+      border-color: var(--line-300);
     }
 
     .badge--category {
-      background: var(--slate-50);
-      color: var(--slate-700);
-      border-color: var(--slate-200);
+      background: var(--surface-subtle);
+      color: var(--ink-600);
+      border-color: var(--line-200);
       font-weight: 500;
     }
 
     .badge--overdue {
-      background: var(--danger-bg);
-      color: var(--danger-text);
-      border-color: var(--danger-border);
+      background: var(--uob-red-600);
+      color: #ffffff;
+      border-color: var(--uob-red-600);
     }
 
     .card-meta {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      padding-top: var(--space-2);
-      border-top: 1px solid var(--slate-100);
-      font-size: 0.76rem;
-      color: var(--slate-600);
+      gap: 6px;
+      padding-top: 9px;
+      border-top: 1px solid var(--line-100);
+      font-size: 0.75rem;
+      color: var(--ink-600);
     }
 
     .card-meta-row {
@@ -669,36 +862,63 @@
 
     .card-project {
       font-weight: 600;
-      color: var(--navy-800);
+      color: var(--uob-navy-800);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .card-assignee {
-      color: var(--slate-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-700);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .assignee-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-xs);
+      background: var(--uob-blue-100);
+      color: var(--uob-navy-900);
+      font-size: 0.64rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .assignee-name {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .card-due {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
-      color: var(--slate-600);
+      color: var(--ink-500);
     }
 
     .card-due--overdue {
-      color: var(--danger-text);
+      color: var(--critical-text);
       font-weight: 600;
     }
 
-    /* Card Footer Controls (Keyboard Move & Inline Delete Confirm) */
+    /* Card Footer Controls */
     .card-footer {
       display: flex;
       flex-direction: column;
       gap: var(--space-2);
-      padding-top: var(--space-1);
+      padding-top: 2px;
     }
 
     .card-controls-row {
@@ -709,56 +929,62 @@
     }
 
     .card-move-btn {
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
-      border-radius: var(--radius-sm);
-      padding: 3px 8px;
-      font-size: 0.74rem;
+      background: var(--surface-subtle);
+      border: 1px solid var(--line-200);
+      border-radius: var(--radius-xs);
+      padding: 4px 9px;
+      font-size: 0.73rem;
       font-weight: 600;
-      color: var(--navy-800);
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      color: var(--uob-navy-800);
+      transition: background-color 0.14s var(--ease-out),
+        border-color 0.14s var(--ease-out),
+        color 0.14s var(--ease-out);
     }
 
     .card-move-btn:hover {
-      background: var(--blue-50);
-      border-color: var(--blue-500);
-      color: var(--blue-700);
+      background: var(--uob-blue-50);
+      border-color: var(--uob-blue-700);
+      color: var(--uob-blue-700);
     }
 
     .card-move-panel {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 4px;
-      padding: var(--space-2);
-      background: var(--slate-50);
-      border: 1px solid var(--slate-200);
+      gap: 5px;
+      padding: 8px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--line-200);
       border-radius: var(--radius-sm);
     }
 
     .card-move-label {
       width: 100%;
-      font-size: 0.7rem;
+      font-size: 0.69rem;
       font-weight: 600;
-      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-500);
       margin-bottom: 2px;
     }
 
     .card-move-option {
-      background: var(--white);
-      border: 1px solid var(--slate-300);
-      border-radius: var(--radius-sm);
-      padding: 3px 7px;
+      background: var(--surface);
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-xs);
+      padding: 4px 8px;
       font-size: 0.72rem;
       font-weight: 500;
-      color: var(--slate-800);
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      color: var(--ink-900);
+      transition: background-color 0.14s var(--ease-out),
+        border-color 0.14s var(--ease-out),
+        color 0.14s var(--ease-out);
     }
 
     .card-move-option:hover {
-      background: var(--blue-600);
-      border-color: var(--blue-600);
-      color: var(--white);
+      background: var(--uob-navy-900);
+      border-color: var(--uob-navy-900);
+      color: #ffffff;
     }
 
     .card-confirm-delete {
@@ -766,7 +992,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-2);
-      padding: 6px 8px;
+      padding: 7px 9px;
       background: var(--danger-bg);
       border: 1px solid var(--danger-border);
       border-radius: var(--radius-sm);
@@ -781,40 +1007,41 @@
     }
 
     .btn-confirm-yes {
-      background: var(--critical-border);
-      color: var(--white);
-      border: 1px solid var(--critical-border);
-      border-radius: var(--radius-sm);
-      padding: 2px 9px;
+      background: var(--uob-red-600);
+      color: #ffffff;
+      border: 1px solid var(--uob-red-600);
+      border-radius: var(--radius-xs);
+      padding: 3px 10px;
       font-size: 0.74rem;
       font-weight: 600;
     }
 
     .btn-confirm-yes:hover {
-      background: #b91c1c;
+      background: var(--uob-red-700);
     }
 
     .btn-confirm-no {
-      background: var(--white);
-      color: var(--slate-700);
-      border: 1px solid var(--slate-300);
-      border-radius: var(--radius-sm);
-      padding: 2px 9px;
+      background: var(--surface);
+      color: var(--ink-700);
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-xs);
+      padding: 3px 10px;
       font-size: 0.74rem;
       font-weight: 600;
     }
 
     .btn-confirm-no:hover {
-      background: var(--slate-100);
+      background: var(--surface-subtle);
     }
 
     /* =====================================================================
-       7. MODAL & ADD TASK FORM
+       8. MODAL & ADD TASK FORM
        ===================================================================== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(9, 29, 54, 0.58);
+      background: rgba(0, 21, 61, 0.56);
+      backdrop-filter: blur(2px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -827,8 +1054,9 @@
     }
 
     .modal-dialog {
-      background: var(--white);
-      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border-top: 3px solid var(--uob-red-600);
       box-shadow: var(--shadow-lg);
       width: 100%;
       max-width: 620px;
@@ -836,61 +1064,63 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      animation: surface-enter 0.2s var(--ease-out) both;
     }
 
     .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--space-4) var(--space-5);
-      border-bottom: 1px solid var(--slate-200);
-      background: var(--slate-50);
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line-200);
+      background: var(--surface-subtle);
     }
 
     .modal-title {
       margin: 0;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: var(--navy-900);
+      color: var(--uob-navy-950);
+      letter-spacing: -0.01em;
     }
 
     .modal-close-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
       border: 1px solid transparent;
       background: transparent;
-      color: var(--slate-500);
+      color: var(--ink-500);
       font-size: 1.25rem;
       line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      transition: background-color 0.14s ease, color 0.14s ease;
     }
 
     .modal-close-btn:hover {
-      background: var(--slate-200);
-      color: var(--slate-900);
+      background: var(--line-200);
+      color: var(--ink-950);
     }
 
     .task-form {
-      padding: var(--space-5);
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: var(--space-4);
+      gap: 16px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-4);
+      gap: 14px 16px;
     }
 
     .form-field {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
     }
 
     .form-field--full {
@@ -898,35 +1128,36 @@
     }
 
     .form-field label {
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      color: var(--slate-700);
+      color: var(--ink-700);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .required-mark {
-      color: var(--critical-border);
+      color: var(--uob-red-600);
       margin-left: 2px;
     }
 
     .char-hint {
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: var(--slate-500);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink-500);
     }
 
     .form-field input,
     .form-field select,
     .form-field textarea {
       width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--slate-300);
-      border-radius: var(--radius-md);
-      background: var(--white);
-      color: var(--slate-900);
-      font-size: 0.88rem;
+      padding: 8px 11px;
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--ink-900);
+      font-size: 0.87rem;
       transition: border-color 0.15s ease;
     }
 
@@ -939,11 +1170,11 @@
     .form-field select[aria-invalid="true"],
     .form-field textarea[aria-invalid="true"] {
       border-color: var(--critical-border);
-      background-color: #fffafa;
+      background-color: var(--uob-red-50);
     }
 
     .field-error {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--danger-text);
       min-height: 1.1em;
     }
@@ -952,21 +1183,21 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: var(--space-3);
-      padding-top: var(--space-3);
-      border-top: 1px solid var(--slate-200);
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line-200);
     }
 
     /* =====================================================================
-       8. TOAST NOTIFICATIONS
+       9. TOAST NOTIFICATIONS & INSTITUTIONAL FOOTER
        ===================================================================== */
     .toast-region {
       position: fixed;
-      right: var(--space-5);
-      bottom: var(--space-5);
+      right: 20px;
+      bottom: 20px;
       display: flex;
       flex-direction: column;
-      gap: var(--space-2);
+      gap: 8px;
       z-index: 1100;
       max-width: 380px;
       pointer-events: none;
@@ -974,65 +1205,91 @@
 
     .toast {
       pointer-events: auto;
-      padding: var(--space-3) var(--space-4);
-      border-radius: var(--radius-md);
-      border-left: 4px solid var(--blue-600);
-      background: var(--white);
-      color: var(--slate-900);
+      padding: 12px 15px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line-200);
+      border-left: 4px solid var(--uob-blue-700);
+      background: var(--surface);
+      color: var(--ink-900);
       box-shadow: var(--shadow-lg);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 500;
       display: flex;
       align-items: flex-start;
-      gap: var(--space-2);
-      animation: toast-in 0.2s ease-out;
+      gap: 8px;
+      animation: surface-enter 0.2s var(--ease-out) both;
     }
 
     .toast--success {
       background: var(--success-bg);
+      border-color: #a7f3d0;
       border-left-color: var(--success-border);
       color: var(--success-text);
     }
 
     .toast--warning {
       background: var(--warning-bg);
+      border-color: #fde68a;
       border-left-color: var(--warning-border);
       color: var(--warning-text);
     }
 
     .toast--info {
-      background: var(--blue-50);
-      border-left-color: var(--blue-600);
-      color: var(--navy-900);
+      background: var(--uob-blue-50);
+      border-color: #c8dafb;
+      border-left-color: var(--uob-blue-700);
+      color: var(--uob-navy-900);
     }
 
-    @keyframes toast-in {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .app-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--line-200);
+      padding: 14px 0;
+      color: var(--ink-500);
+      font-size: 0.76rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .footer-brand {
+      font-weight: 600;
+      color: var(--uob-navy-900);
     }
 
     /* =====================================================================
-       9. RESPONSIVE BREAKPOINTS (STACK BELOW 768PX)
+       10. RESPONSIVE BREAKPOINTS & REDUCED MOTION
        ===================================================================== */
     @media (max-width: 1180px) {
+      .kpi-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .kpi-cell {
+        border-bottom: 1px solid var(--line-200);
+      }
+
       .kanban-board {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 767px) {
-      .header-inner {
-        padding: var(--space-4);
+      :root {
+        --gutter: 16px;
       }
 
-      .app-main {
-        padding: var(--space-4);
+      .env-badge {
+        display: none;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .kanban-board {
@@ -1047,111 +1304,164 @@
         grid-template-columns: 1fr;
       }
 
-      .demo-note {
-        margin-left: 0;
-        width: 100%;
-      }
-
       .filter-actions {
         margin-left: 0;
         width: 100%;
         justify-content: space-between;
       }
 
+      .btn-primary,
+      .btn-secondary,
+      .card-move-btn,
+      .card-move-option {
+        min-height: 40px;
+      }
+
       .toast-region {
-        left: var(--space-4);
-        right: var(--space-4);
-        bottom: var(--space-4);
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
         max-width: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
+  <a href="#kanban-board" class="skip-link">Skip to Kanban board</a>
+  <div class="top-accent" aria-hidden="true"></div>
+
   <!-- ===================================================================
-       HEADER: WORDMARK, ADD TASK TRIGGER & LIVE SUMMARY STRIP
+       HEADER: UOB LOGO LOCKUP, TITLE & PRIMARY ACTION
        =================================================================== -->
-  <header class="app-header">
-    <div class="header-inner">
-      <div class="header-top">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="18" rx="1"></rect>
-              <rect x="14" y="3" width="7" height="10" rx="1"></rect>
-              <rect x="14" y="17" width="7" height="4" rx="1"></rect>
-            </svg>
-          </span>
-          <div>
-            <h1 class="brand-title">IT PMO</h1>
-            <p class="brand-subtitle">Internal IT Project Delivery &amp; Portfolio Kanban</p>
-          </div>
+  <header class="app-header" data-enter>
+    <div class="wrap header-bar">
+      <div class="brand">
+        <div class="uob-logo-lockup" aria-label="UOB — United Overseas Bank">
+          <!-- Crisp UOB 5-Bar Emblem & Wordmark -->
+          <svg class="uob-logo-svg" viewBox="0 0 132 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UOB Logo">
+            <g fill="#ED1C24">
+              <rect x="0" y="3" width="4.2" height="28" rx="1.2" />
+              <rect x="7.4" y="3" width="4.2" height="28" rx="1.2" />
+              <rect x="14.8" y="3" width="4.2" height="28" rx="1.2" />
+              <rect x="22.2" y="3" width="4.2" height="28" rx="1.2" />
+              <rect x="29.6" y="3" width="4.2" height="28" rx="1.2" />
+            </g>
+            <text
+              x="44"
+              y="26.5"
+              fill="#FFFFFF"
+              font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
+              font-size="25"
+              font-weight="800"
+              letter-spacing="1.2"
+            >UOB</text>
+          </svg>
         </div>
 
-        <div class="header-actions">
-          <button type="button" id="open-add-modal-btn" class="btn-primary">
-            <span aria-hidden="true">+</span> Add Task
-          </button>
+        <span class="brand-divider" aria-hidden="true"></span>
+
+        <div class="brand-copy">
+          <h1 class="brand-title">IT PMO Portfolio Board</h1>
+          <p class="brand-subtitle">Technology Delivery, Risk &amp; Release Governance</p>
         </div>
       </div>
 
-      <div class="summary-strip" id="summary-strip" aria-label="Live task summary">
-        <!-- Populated dynamically by renderBoard() -->
+      <div class="header-actions">
+        <span class="env-badge" title="In-memory workspace — refreshing resets board to sample data">
+          <span class="env-dot" aria-hidden="true"></span>
+          In-Memory Workspace
+        </span>
+        <button type="button" id="open-add-modal-btn" class="btn-primary">
+          <span aria-hidden="true">+</span> Add Task
+        </button>
       </div>
     </div>
   </header>
 
   <!-- ===================================================================
+       LIVE PORTFOLIO KPI SUMMARY BAND
+       =================================================================== -->
+  <section class="kpi-band" aria-label="Portfolio task summary" data-enter>
+    <div class="wrap">
+      <div class="kpi-grid" id="summary-strip">
+        <!-- Populated dynamically by renderSummaryStrip() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
        MAIN WORKSPACE: FILTER BAR & FOUR-COLUMN KANBAN BOARD
        =================================================================== -->
   <main class="app-main">
-    <section class="filter-bar" aria-label="Filter tasks">
-      <div class="filter-group">
-        <label for="filter-project">Project / Workstream</label>
-        <select id="filter-project">
-          <option value="">All Projects</option>
-          <option value="Core Banking Upgrade">Core Banking Upgrade</option>
-          <option value="Digital Channels">Digital Channels</option>
-          <option value="Cybersecurity Uplift">Cybersecurity Uplift</option>
-          <option value="Data &amp; Analytics">Data &amp; Analytics</option>
-          <option value="Infrastructure &amp; Cloud">Infrastructure &amp; Cloud</option>
-          <option value="Vendor Management">Vendor Management</option>
-        </select>
-      </div>
+    <div class="wrap workspace-stack">
+      <section class="filter-bar" aria-label="Filter tasks">
+        <div class="filter-group">
+          <label for="filter-project">Workstream / Project</label>
+          <select id="filter-project">
+            <option value="">All Workstreams</option>
+            <option value="Core Banking Upgrade">Core Banking Upgrade</option>
+            <option value="Digital Channels">Digital Channels</option>
+            <option value="Cybersecurity Uplift">Cybersecurity Uplift</option>
+            <option value="Data &amp; Analytics">Data &amp; Analytics</option>
+            <option value="Infrastructure &amp; Cloud">Infrastructure &amp; Cloud</option>
+            <option value="Vendor Management">Vendor Management</option>
+          </select>
+        </div>
 
-      <div class="filter-group">
-        <label for="filter-assignee">Assignee</label>
-        <input
-          type="text"
-          id="filter-assignee"
-          placeholder="Search by assignee name…"
-          autocomplete="off"
-        />
-      </div>
+        <div class="filter-group">
+          <label for="filter-assignee">Assignee</label>
+          <input
+            type="text"
+            id="filter-assignee"
+            placeholder="Search by assignee name…"
+            autocomplete="off"
+          />
+        </div>
 
-      <div class="filter-group">
-        <label for="filter-priority">Priority</label>
-        <select id="filter-priority">
-          <option value="">All Priorities</option>
-          <option value="Critical">Critical</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
+        <div class="filter-group">
+          <label for="filter-priority">Priority</label>
+          <select id="filter-priority">
+            <option value="">All Priorities</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
 
-      <div class="filter-actions">
-        <span class="filter-status" id="filter-status"></span>
-        <button type="button" id="clear-filters-btn" class="btn-secondary">
-          Reset Filters
-        </button>
-      </div>
-    </section>
+        <div class="filter-actions">
+          <span class="filter-status" id="filter-status"></span>
+          <button type="button" id="clear-filters-btn" class="btn-secondary">
+            Reset Filters
+          </button>
+        </div>
+      </section>
 
-    <section class="kanban-board" id="kanban-board" aria-label="Kanban task board">
-      <!-- Four fixed columns rendered dynamically by renderBoard() -->
-    </section>
+      <section class="kanban-board" id="kanban-board" tabindex="-1" aria-label="Kanban task board">
+        <!-- Four fixed columns rendered dynamically by renderBoard() -->
+      </section>
+    </div>
   </main>
+
+  <!-- ===================================================================
+       INSTITUTIONAL FOOTER
+       =================================================================== -->
+  <footer class="app-footer">
+    <div class="wrap footer-inner">
+      <span><span class="footer-brand">UOB Group Technology &amp; Operations</span> &middot; Internal IT PMO Delivery Board</span>
+      <span>Drag cards across columns or use Move controls &middot; Refreshing resets demo state</span>
+    </div>
+  </footer>
 
   <!-- ===================================================================
        ADD TASK MODAL DIALOG
@@ -1211,7 +1521,7 @@
 
           <div class="form-field">
             <label for="task-project">
-              <span>Project / Workstream <span class="required-mark" aria-hidden="true">*</span></span>
+              <span>Workstream / Project <span class="required-mark" aria-hidden="true">*</span></span>
             </label>
             <select id="task-project" name="project" required>
               <option value="Core Banking Upgrade">Core Banking Upgrade</option>
@@ -1292,8 +1602,8 @@
           <button type="button" id="cancel-modal-btn" class="btn-secondary">
             Cancel
           </button>
-          <button type="submit" id="submit-task-btn" class="btn-primary">
-            Add Task
+          <button type="submit" id="submit-task-btn" class="btn-primary btn-primary--navy">
+            Create Task
           </button>
         </div>
       </form>
@@ -1332,31 +1642,31 @@
       {
         id: "Backlog",
         label: "Backlog",
-        meaning: "Logged, not yet scheduled",
+        meaning: "Logged, awaiting sprint scheduling",
         dotClass: "column-dot--backlog",
       },
       {
         id: "In Progress",
         label: "In Progress",
-        meaning: "Actively being worked",
+        meaning: "Active delivery workstream",
         dotClass: "column-dot--in-progress",
       },
       {
         id: "Blocked",
         label: "Blocked",
-        meaning: "Waiting on a dependency, vendor or approval",
+        meaning: "Pending dependency, vendor or sign-off",
         dotClass: "column-dot--blocked",
       },
       {
         id: "Done",
         label: "Done",
-        meaning: "Completed / closed",
+        meaning: "Completed and attested",
         dotClass: "column-dot--done",
       },
     ];
 
     /* ===================================================================
-       2. DATE & SANITISATION HELPERS
+       2. DATE, INITIALS & SANITISATION HELPERS
        =================================================================== */
     function formatDateISO(date) {
       const year = date.getFullYear();
@@ -1378,6 +1688,13 @@
     function isTaskOverdue(task) {
       if (!task.dueDate || task.status === "Done") return false;
       return task.dueDate < getTodayISO();
+    }
+
+    function getInitials(name) {
+      const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+      if (parts.length === 0) return "?";
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
     }
 
     function escapeHtml(value) {
@@ -1631,7 +1948,7 @@
     }
 
     /* ===================================================================
-       8. RENDERING (SUMMARY STRIP, COLUMNS & CARDS)
+       8. RENDERING (KPI SUMMARY BAND, COLUMNS & CARDS)
        =================================================================== */
     function renderSummaryStrip() {
       const total = state.tasks.length;
@@ -1652,18 +1969,51 @@
         }
       }
 
+      const completionPct = total > 0 ? Math.round((counts.Done / total) * 100) : 0;
+
       summaryStripEl.innerHTML = `
-        <span class="summary-pill">Total <strong>${total}</strong></span>
-        <span class="summary-pill">Backlog <strong>${counts.Backlog}</strong></span>
-        <span class="summary-pill">In Progress <strong>${counts["In Progress"]}</strong></span>
-        <span class="summary-pill">Blocked <strong>${counts.Blocked}</strong></span>
-        <span class="summary-pill">Done <strong>${counts.Done}</strong></span>
-        <span class="summary-pill ${overdueCount > 0 ? "summary-pill--overdue" : ""}">
-          Overdue <strong>${overdueCount}</strong>
-        </span>
-        <span class="demo-note" title="No browser storage or backend database is used">
-          &#9432; In-memory demo — refreshing resets board to sample data
-        </span>
+        <div class="kpi-cell">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--total" aria-hidden="true"></span>Total Portfolio</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${total}</span>
+            <span class="kpi-sub">${completionPct}% done</span>
+          </div>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--backlog" aria-hidden="true"></span>Backlog</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${counts.Backlog}</span>
+            <span class="kpi-sub">queued</span>
+          </div>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--in-progress" aria-hidden="true"></span>In Progress</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${counts["In Progress"]}</span>
+            <span class="kpi-sub">active</span>
+          </div>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--blocked" aria-hidden="true"></span>Blocked</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${counts.Blocked}</span>
+            <span class="kpi-sub">escalated</span>
+          </div>
+        </div>
+        <div class="kpi-cell">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--done" aria-hidden="true"></span>Done</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${counts.Done}</span>
+            <span class="kpi-sub">closed</span>
+          </div>
+        </div>
+        <div class="kpi-cell ${overdueCount > 0 ? "kpi-cell--overdue-alert" : ""}">
+          <span class="kpi-label"><span class="kpi-dot kpi-dot--overdue" aria-hidden="true"></span>Overdue</span>
+          <div class="kpi-value-row">
+            <span class="kpi-value">${overdueCount}</span>
+            <span class="kpi-sub">${overdueCount > 0 ? "attention" : "on track"}</span>
+          </div>
+        </div>
       `;
     }
 
@@ -1680,6 +2030,7 @@
       const safeProject = escapeHtml(task.project);
       const safeCategory = escapeHtml(task.category);
       const safeAssignee = escapeHtml(task.assignee);
+      const safeInitials = escapeHtml(getInitials(task.assignee));
       const safePriority = escapeHtml(task.priority);
       const safeDueDate = escapeHtml(task.dueDate);
 
@@ -1737,10 +2088,11 @@
             </div>
             <div class="card-meta-row">
               <span class="card-assignee" title="Assignee: ${safeAssignee}">
-                &#128100; ${safeAssignee}
+                <span class="assignee-avatar" aria-hidden="true">${safeInitials}</span>
+                <span class="assignee-name">${safeAssignee}</span>
               </span>
               <span class="card-due ${overdue ? "card-due--overdue" : ""}" title="Due date">
-                Due ${safeDueDate}
+                ${safeDueDate}
               </span>
             </div>
           </div>
@@ -1762,7 +2114,7 @@
               isMoveOpen
                 ? `
                   <div class="card-move-panel" role="group" aria-label="Move ${safeId} to column">
-                    <span class="card-move-label">Move to column:</span>
+                    <span class="card-move-label">Move to column</span>
                     ${moveOptionsHtml}
                   </div>
                 `
@@ -1773,7 +2125,7 @@
               isDeleteOpen
                 ? `
                   <div class="card-confirm-delete" role="group" aria-label="Confirm delete ${safeId}">
-                    <span>Delete?</span>
+                    <span>Delete task?</span>
                     <div class="card-confirm-actions">
                       <button
                         type="button"
@@ -1781,7 +2133,7 @@
                         data-action="confirm-delete"
                         data-task-id="${safeId}"
                       >
-                        Yes
+                        Delete
                       </button>
                       <button
                         type="button"
@@ -1789,7 +2141,7 @@
                         data-action="cancel-delete"
                         data-task-id="${safeId}"
                       >
-                        No
+                        Cancel
                       </button>
                     </div>
                   </div>
@@ -1857,7 +2209,6 @@
       state.draggingTaskId = taskId;
       event.dataTransfer.effectAllowed = "move";
       event.dataTransfer.setData("text/plain", taskId);
-      // Defer visual class slightly so the drag ghost renders at full opacity.
       window.requestAnimationFrame(() => {
         card.classList.add("task-card--dragging");
       });
@@ -2146,13 +2497,11 @@
       const { isValid, data } = validateTaskForm();
       if (!isValid) return;
 
-      // Optimistic UI: add card and re-render immediately.
       const createdTask = addTask(data);
 
-      // Disable submit button and show in-flight state while FormSubmit runs.
       state.isSubmitting = true;
       submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
+      submitBtn.textContent = "Creating…";
 
       try {
         await notifyNewTask(createdTask);
@@ -2171,7 +2520,7 @@
       } finally {
         state.isSubmitting = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = "Add Task";
+        submitBtn.textContent = "Create Task";
       }
     });
 

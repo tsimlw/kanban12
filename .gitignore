@@ -21,3 +21,7 @@ Thumbs.db
 *.log
 tmp/
 temp/
+
+# Third-party installed skill packages (restorable via skills-lock.json)
+.agents/skills/design-taste-frontend/
+.taste-skill/

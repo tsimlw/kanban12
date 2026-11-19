@@ -1,17 +1,18 @@
-# IT PMO — Kanban Project Board
+# UOB IT PMO — Delivery & Portfolio Kanban Board
 
-A single-file, zero-dependency Kanban project board built for internal IT Project Management Office (PMO) delivery and portfolio tracking.
+A single-file, zero-dependency institutional Kanban project board designed for UOB Group Technology & Operations IT Project Management Office (PMO) delivery and portfolio governance.
 
 **Live Demo:** [https://tsimlw.github.io/kanban12/](https://tsimlw.github.io/kanban12/)
 
 ## Features
 
-- **Four-Column Kanban Workflow**: Manage tasks across **Backlog**, **In Progress**, **Blocked**, and **Done** columns with drag-and-drop and quick-move controls.
-- **Live Summary Strip**: Real-time task counts by status and overdue indicators in the header.
-- **Multi-Facet Filtering**: Filter cards by **Project / Workstream**, **Assignee** search, and **Priority** (`Critical`, `High`, `Medium`, `Low`) with one-click filter reset.
-- **Add & Manage Tasks**: Accessible modal form with field validation, character counters, due dates, categories, inline delete confirmation, and toast notifications.
+- **UOB Institutional Design**: Features the UOB five-bar emblem and wordmark, UOB Navy & Red brand palette, sharp architectural radii, and `Inter` + `IBM Plex Mono` typography.
+- **Live Portfolio KPI Strip**: Real-time 6-column summary band tracking **Total Portfolio** (with completion percentage), **Backlog**, **In Progress**, **Blocked**, **Done**, and **Overdue** alerts.
+- **Four-Column Kanban Workflow**: Manage tasks across **Backlog**, **In Progress**, **Blocked**, and **Done** columns with native drag-and-drop and keyboard-accessible **Move** controls.
+- **Multi-Facet Filtering**: Filter cards by **Workstream / Project**, **Assignee** search, and **Priority** (`Critical`, `High`, `Medium`, `Low`) with one-click filter reset.
+- **Add & Manage Tasks**: Accessible modal form with field validation, character counters, due dates, categories, initials avatars, inline delete confirmation, and toast notifications.
 - **Optional Email Notifications**: Built-in [FormSubmit](https://formsubmit.co/) AJAX hook (`FORMSUBMIT_ENDPOINT` in `index.html`) for notifying a recipient when new tasks are created.
-- **Responsive & Accessible**: Adapts cleanly across desktop, tablet, and mobile viewports with ARIA live regions and keyboard-friendly controls.
+- **Responsive & Accessible**: Adapts cleanly across desktop, tablet, and mobile viewports with a keyboard skip link, ARIA live regions, and `prefers-reduced-motion` support.
 
 ## Tech Stack
 
