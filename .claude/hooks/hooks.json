@@ -1,0 +1,16 @@
+{
+  "chatbot-voice-greeting": {
+    "enabled": true,
+    "description": "Generates a voice greeting when the user clicks the UOB IT Assistant chatbot widget.",
+    "event": "chatbot_click",
+    "voiceMessage": "I am your IT assistant, how can I help you?",
+    "hooks": [
+      {
+        "type": "command",
+        "command": "node .claude/hooks/chatbot-voice-greeting.mjs",
+        "windowsCommand": "powershell -NoProfile -ExecutionPolicy Bypass -File .claude/hooks/chatbot-voice-greeting.ps1",
+        "timeout": 15
+      }
+    ]
+  }
+}

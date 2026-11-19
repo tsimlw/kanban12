@@ -6,7 +6,7 @@
   <meta name="description" content="UOB IT PMO Delivery & Portfolio Kanban Board for tracking banking technology workstreams, blockers, and releases." />
   <meta name="theme-color" content="#00205B" />
   <title>UOB IT PMO — Delivery &amp; Portfolio Kanban</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2300205B'/%3E%3Cg fill='%23ED1C24'%3E%3Crect x='5' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='10' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='14.7' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='19.4' y='6' width='2.6' height='20' rx='1'/%3E%3Crect x='24.4' y='6' width='2.6' height='20' rx='1'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2300205B'/%3E%3Cg fill='%23ED1C24'%3E%3Crect x='5' y='6' width='2.6' height='20'/%3E%3Crect x='10' y='6' width='2.6' height='20'/%3E%3Crect x='14.7' y='6' width='2.6' height='20'/%3E%3Crect x='19.4' y='6' width='2.6' height='20'/%3E%3Crect x='24.4' y='6' width='2.6' height='20'/%3E%3Crect x='5' y='14.6' width='22' height='2.8'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -1320,9 +1320,325 @@
       .toast-region {
         left: 16px;
         right: 16px;
-        bottom: 16px;
+        bottom: 92px;
         max-width: none;
       }
+
+      .rag-panel {
+        right: 12px;
+        bottom: 84px;
+        width: calc(100vw - 24px);
+        height: min(500px, calc(100vh - 110px));
+      }
+
+      .rag-launcher-wrap {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .rag-launcher-pill {
+        display: none;
+      }
+    }
+
+    /* =====================================================================
+       11. CUTE AVATAR WIDGET & TEXT-BASED RAG CHATBOT (BOTTOM-RIGHT)
+       ===================================================================== */
+    .task-card--highlight {
+      box-shadow: 0 0 0 3px var(--uob-blue-600), var(--shadow-md);
+      border-color: var(--uob-blue-600);
+    }
+
+    .rag-launcher-wrap {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 950;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rag-launcher-pill {
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.18s var(--ease-out), transform 0.18s var(--ease-out);
+    }
+
+    .rag-launcher-wrap.is-open .rag-launcher-pill {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+
+    .rag-avatar-btn {
+      position: relative;
+      width: 62px;
+      height: 62px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2.5px solid #ffffff;
+      background: linear-gradient(145deg, #003da5 0%, #00205b 100%);
+      box-shadow: 0 10px 26px rgba(0, 32, 91, 0.34);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+    }
+
+    .rag-avatar-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 30px rgba(0, 32, 91, 0.42);
+    }
+
+    .rag-avatar-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .rag-avatar-status {
+      position: absolute;
+      right: 2px;
+      bottom: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 2px solid #ffffff;
+    }
+
+    .rag-panel {
+      position: fixed;
+      right: 24px;
+      bottom: 98px;
+      width: 392px;
+      max-width: calc(100vw - 32px);
+      height: 528px;
+      max-height: calc(100vh - 120px);
+      background: var(--surface);
+      border: 1px solid var(--line-300);
+      border-top: 3px solid var(--uob-red-600);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 960;
+      animation: surface-enter 0.2s var(--ease-out) both;
+    }
+
+    .rag-panel[hidden] {
+      display: none;
+    }
+
+    .rag-header {
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .rag-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .rag-mini-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rag-header-title {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .rag-header-sub {
+      margin: 2px 0 0;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.78);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .rag-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .rag-icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.14s ease;
+    }
+
+    .rag-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .rag-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      background: var(--ground);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rag-msg {
+      max-width: 88%;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      line-height: 1.48;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .rag-msg--bot {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--ink-900);
+      border: 1px solid var(--line-200);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .rag-msg--user {
+      align-self: flex-end;
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      border: 1px solid var(--uob-navy-900);
+    }
+
+    .rag-sources {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--line-100);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .rag-sources-label {
+      font-size: 0.67rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-500);
+    }
+
+    .rag-source-chip {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+      background: var(--uob-blue-50);
+      color: var(--uob-navy-800);
+      border: 1px solid #c8dafb;
+      cursor: pointer;
+      transition: background-color 0.14s ease, color 0.14s ease;
+    }
+
+    .rag-source-chip:hover {
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      border-color: var(--uob-navy-900);
+    }
+
+    .rag-quick-bar {
+      padding: 8px 12px;
+      background: var(--surface);
+      border-top: 1px solid var(--line-200);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .rag-quick-chip {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--surface-subtle);
+      color: var(--uob-navy-800);
+      border: 1px solid var(--line-300);
+      transition: background-color 0.14s ease, border-color 0.14s ease;
+    }
+
+    .rag-quick-chip:hover {
+      background: var(--uob-blue-50);
+      border-color: var(--uob-blue-700);
+    }
+
+    .rag-input-form {
+      padding: 10px 12px;
+      background: var(--surface);
+      border-top: 1px solid var(--line-200);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rag-input {
+      flex: 1;
+      height: 38px;
+      padding: 0 11px;
+      border: 1px solid var(--line-300);
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      background: var(--surface);
+      color: var(--ink-900);
+    }
+
+    .rag-send-btn {
+      height: 38px;
+      padding: 0 14px;
+      background: var(--uob-navy-900);
+      color: #ffffff;
+      border: 1px solid var(--uob-navy-900);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: background-color 0.14s ease;
+    }
+
+    .rag-send-btn:hover {
+      background: var(--uob-blue-700);
+      border-color: var(--uob-blue-700);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1347,23 +1663,24 @@
     <div class="wrap header-bar">
       <div class="brand">
         <div class="uob-logo-lockup" aria-label="UOB — United Overseas Bank">
-          <!-- Crisp UOB 5-Bar Emblem & Wordmark -->
-          <svg class="uob-logo-svg" viewBox="0 0 132 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UOB Logo">
+          <!-- Official UOB Five-Bar Gate Emblem (5 vertical bars + horizontal crossbar) & Wordmark -->
+          <svg class="uob-logo-svg" viewBox="0 0 144 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UOB Logo">
             <g fill="#ED1C24">
-              <rect x="0" y="3" width="4.2" height="28" rx="1.2" />
-              <rect x="7.4" y="3" width="4.2" height="28" rx="1.2" />
-              <rect x="14.8" y="3" width="4.2" height="28" rx="1.2" />
-              <rect x="22.2" y="3" width="4.2" height="28" rx="1.2" />
-              <rect x="29.6" y="3" width="4.2" height="28" rx="1.2" />
+              <rect x="0" y="3" width="4.4" height="30" />
+              <rect x="8.2" y="3" width="4.4" height="30" />
+              <rect x="16.4" y="3" width="4.4" height="30" />
+              <rect x="24.6" y="3" width="4.4" height="30" />
+              <rect x="32.8" y="3" width="4.4" height="30" />
+              <rect x="0" y="15.8" width="37.2" height="4.4" />
             </g>
             <text
-              x="44"
-              y="26.5"
+              x="49"
+              y="28"
               fill="#FFFFFF"
               font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
-              font-size="25"
+              font-size="27"
               font-weight="800"
-              letter-spacing="1.2"
+              letter-spacing="1.4"
             >UOB</text>
           </svg>
         </div>
@@ -1620,6 +1937,117 @@
     aria-live="polite"
     aria-atomic="false"
   ></div>
+
+  <!-- ===================================================================
+       TEXT-BASED RAG CHATBOT & CUTE AVATAR WIDGET (BOTTOM-RIGHT)
+       =================================================================== -->
+  <section
+    class="rag-panel"
+    id="rag-panel"
+    role="dialog"
+    aria-label="UOB IT Assistant RAG Chatbot"
+    hidden
+  >
+    <div class="rag-header">
+      <div class="rag-header-left">
+        <span class="rag-mini-avatar" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="32" y1="8" x2="32" y2="15" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+            <circle cx="32" cy="7" r="4" fill="#ED1C24" />
+            <rect x="14" y="16" width="36" height="30" rx="14" fill="#FFFFFF" />
+            <rect x="9" y="25" width="5" height="12" rx="2.5" fill="#93C5FD" />
+            <rect x="50" y="25" width="5" height="12" rx="2.5" fill="#93C5FD" />
+            <circle cx="25" cy="29" r="3.4" fill="#00205B" />
+            <circle cx="39" cy="29" r="3.4" fill="#00205B" />
+            <circle cx="26.2" cy="27.8" r="1.2" fill="#FFFFFF" />
+            <circle cx="40.2" cy="27.8" r="1.2" fill="#FFFFFF" />
+            <circle cx="20.5" cy="34.5" r="2.6" fill="#FDA4AF" opacity="0.8" />
+            <circle cx="43.5" cy="34.5" r="2.6" fill="#FDA4AF" opacity="0.8" />
+            <path d="M26.5 36.5C28 39 36 39 37.5 36.5" stroke="#00205B" stroke-width="2.6" stroke-linecap="round" />
+            <path d="M20 48C20 44.5 25 43 32 43C39 43 44 44.5 44 48V54H20V48Z" fill="#DCE8FC" />
+          </svg>
+        </span>
+        <div>
+          <h2 class="rag-header-title">UOB IT Assistant</h2>
+          <p class="rag-header-sub">Live Board RAG &middot; Voice Greeting Enabled</p>
+        </div>
+      </div>
+
+      <div class="rag-header-actions">
+        <button
+          type="button"
+          id="rag-voice-btn"
+          class="rag-icon-btn"
+          title="Replay voice greeting"
+          aria-label="Replay voice greeting"
+        >
+          &#128266;
+        </button>
+        <button
+          type="button"
+          id="rag-close-btn"
+          class="rag-icon-btn"
+          title="Close assistant"
+          aria-label="Close assistant"
+        >
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <div class="rag-messages" id="rag-messages" aria-live="polite">
+      <!-- Messages rendered dynamically -->
+    </div>
+
+    <div class="rag-quick-bar" id="rag-quick-bar" aria-label="Quick questions">
+      <button type="button" class="rag-quick-chip" data-rag-query="What tasks are overdue?">Overdue tasks?</button>
+      <button type="button" class="rag-quick-chip" data-rag-query="Show blocked tasks">Blocked items</button>
+      <button type="button" class="rag-quick-chip" data-rag-query="List critical priority tasks">Critical priority</button>
+      <button type="button" class="rag-quick-chip" data-rag-query="Give me a portfolio summary">Portfolio summary</button>
+    </div>
+
+    <form class="rag-input-form" id="rag-form" autocomplete="off">
+      <label for="rag-input" class="sr-only">Ask the IT Assistant</label>
+      <input
+        type="text"
+        id="rag-input"
+        class="rag-input"
+        placeholder="Ask about tasks, owners, blockers…"
+      />
+      <button type="submit" class="rag-send-btn">Send</button>
+    </form>
+  </section>
+
+  <div class="rag-launcher-wrap" id="rag-launcher-wrap">
+    <span class="rag-launcher-pill" aria-hidden="true">Ask IT Assistant</span>
+    <button
+      type="button"
+      id="rag-avatar-btn"
+      class="rag-avatar-btn"
+      aria-label="Open UOB IT Assistant Chatbot"
+      aria-expanded="false"
+      aria-controls="rag-panel"
+      title="Open UOB IT Assistant"
+    >
+      <svg width="46" height="46" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="32" y1="7" x2="32" y2="15" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+        <circle cx="32" cy="6.5" r="4.2" fill="#ED1C24" />
+        <rect x="13" y="15" width="38" height="31" rx="15" fill="#FFFFFF" />
+        <rect x="8" y="24" width="5.5" height="13" rx="2.75" fill="#93C5FD" />
+        <rect x="50.5" y="24" width="5.5" height="13" rx="2.75" fill="#93C5FD" />
+        <circle cx="24.5" cy="29" r="3.6" fill="#00205B" />
+        <circle cx="39.5" cy="29" r="3.6" fill="#00205B" />
+        <circle cx="25.8" cy="27.6" r="1.3" fill="#FFFFFF" />
+        <circle cx="40.8" cy="27.6" r="1.3" fill="#FFFFFF" />
+        <circle cx="19.5" cy="35" r="2.8" fill="#FDA4AF" opacity="0.85" />
+        <circle cx="44.5" cy="35" r="2.8" fill="#FDA4AF" opacity="0.85" />
+        <path d="M26 37C28 39.8 36 39.8 38 37" stroke="#00205B" stroke-width="2.6" stroke-linecap="round" />
+        <path d="M19 49C19 45.2 24.8 43.5 32 43.5C39.2 43.5 45 45.2 45 49V55H19V49Z" fill="#DCE8FC" />
+        <rect x="27" y="48.5" width="10" height="2.4" rx="1.2" fill="#ED1C24" />
+      </svg>
+      <span class="rag-avatar-status" aria-hidden="true"></span>
+    </button>
+  </div>
 
   <!-- ===================================================================
        APPLICATION SCRIPT
@@ -2525,7 +2953,330 @@
     });
 
     /* ===================================================================
-       12. INITIALISE BOARD
+       12. TEXT-BASED RAG CHATBOT & VOICE GREETING HOOK
+       Mirrors project-level hook in .claude/hooks/hooks.json:
+       Event: chatbot_click -> "I am your IT assistant, how can I help you?"
+       =================================================================== */
+    const CHATBOT_VOICE_HOOK = {
+      name: "chatbot-voice-greeting",
+      event: "chatbot_click",
+      voiceMessage: "I am your IT assistant, how can I help you?",
+    };
+
+    const ragLauncherWrap = document.getElementById("rag-launcher-wrap");
+    const ragAvatarBtn = document.getElementById("rag-avatar-btn");
+    const ragPanel = document.getElementById("rag-panel");
+    const ragCloseBtn = document.getElementById("rag-close-btn");
+    const ragVoiceBtn = document.getElementById("rag-voice-btn");
+    const ragMessagesEl = document.getElementById("rag-messages");
+    const ragQuickBarEl = document.getElementById("rag-quick-bar");
+    const ragFormEl = document.getElementById("rag-form");
+    const ragInputEl = document.getElementById("rag-input");
+
+    let ragInitialised = false;
+
+    function triggerChatbotVoiceHook() {
+      const text = CHATBOT_VOICE_HOOK.voiceMessage;
+      window.dispatchEvent(
+        new CustomEvent("uob:chatbot_click", { detail: CHATBOT_VOICE_HOOK })
+      );
+
+      if (!("speechSynthesis" in window)) {
+        return false;
+      }
+
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        utterance.rate = 1.0;
+        utterance.pitch = 1.05;
+        const voices = window.speechSynthesis.getVoices();
+        const preferred = voices.find(
+          (v) => /^en(-|_)/i.test(v.lang) && /natural|google|zira|samantha|aria/i.test(v.name)
+        ) || voices.find((v) => /^en/i.test(v.lang));
+        if (preferred) utterance.voice = preferred;
+        window.speechSynthesis.speak(utterance);
+        return true;
+      } catch (_err) {
+        return false;
+      }
+    }
+
+    const PMO_KNOWLEDGE_BASE = [
+      {
+        id: "PMO-GUIDE-WORKFLOW",
+        type: "guide",
+        title: "Kanban Columns & Moving Tasks",
+        text: "Tasks move across four columns: Backlog, In Progress, Blocked, and Done. Drag and drop any card between columns or click Move on a card to transfer it with the keyboard.",
+      },
+      {
+        id: "PMO-GUIDE-ADD",
+        type: "guide",
+        title: "Adding & Filtering Tasks",
+        text: "Click the red + Add Task button in the top right to log a new UOB-ITPM task. Use the filter bar to filter by Workstream / Project, Assignee name, or Priority (Critical, High, Medium, Low).",
+      },
+      {
+        id: "PMO-GUIDE-EMAIL",
+        type: "guide",
+        title: "Email Notifications & Demo Persistence",
+        text: "This board runs as an in-memory workspace, so refreshing resets tasks to the default sample data. New task email notifications can be enabled by updating FORMSUBMIT_ENDPOINT in index.html.",
+      },
+    ];
+
+    function tokenize(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\-]+/g, " ")
+        .split(/\s+/)
+        .filter((w) => w.length > 1);
+    }
+
+    function buildRagCorpus() {
+      const taskDocs = state.tasks.map((task) => {
+        const overdue = isTaskOverdue(task);
+        return {
+          id: task.id,
+          type: "task",
+          task,
+          overdue,
+          text: [
+            task.id,
+            task.title,
+            task.description,
+            task.project,
+            task.category,
+            task.assignee,
+            task.priority,
+            task.status,
+            task.dueDate,
+            overdue ? "overdue late past due attention" : "on track",
+          ].join(" "),
+        };
+      });
+      return [...taskDocs, ...PMO_KNOWLEDGE_BASE];
+    }
+
+    function runBoardRAG(rawQuery) {
+      const query = String(rawQuery || "").trim();
+      const qLower = query.toLowerCase();
+      const qTokens = tokenize(query);
+      const corpus = buildRagCorpus();
+
+      // 1. Direct portfolio summary intent
+      if (/\b(summary|overview|status|count|how many|kpi|stats)\b/i.test(qLower) &&
+          !/\b(overdue|blocked|critical|high|medium|low|backlog|in progress|done)\b/i.test(qLower)) {
+        const total = state.tasks.length;
+        const byStatus = { Backlog: 0, "In Progress": 0, Blocked: 0, Done: 0 };
+        let overdue = 0;
+        for (const t of state.tasks) {
+          if (Object.prototype.hasOwnProperty.call(byStatus, t.status)) byStatus[t.status] += 1;
+          if (isTaskOverdue(t)) overdue += 1;
+        }
+        const pct = total ? Math.round((byStatus.Done / total) * 100) : 0;
+        return {
+          answer:
+            `Portfolio Summary (${total} tasks, ${pct}% completed):\n` +
+            `• Backlog: ${byStatus.Backlog}\n` +
+            `• In Progress: ${byStatus["In Progress"]}\n` +
+            `• Blocked: ${byStatus.Blocked}\n` +
+            `• Done: ${byStatus.Done}\n` +
+            `• Overdue: ${overdue}`,
+          sources: [{ id: "Portfolio KPIs", isTask: false }],
+        };
+      }
+
+      // 2. Direct filtered intents (overdue / column / priority)
+      if (/\b(overdue|late|past due)\b/i.test(qLower)) {
+        const overdueTasks = state.tasks.filter((t) => isTaskOverdue(t));
+        if (overdueTasks.length === 0) {
+          return {
+            answer: "Great news — there are currently no overdue tasks on the board.",
+            sources: [{ id: "Portfolio KPIs", isTask: false }],
+          };
+        }
+        const lines = overdueTasks.map(
+          (t) => `• ${t.id}: ${t.title} (${t.status}, ${t.priority}, due ${t.dueDate}, owner: ${t.assignee})`
+        );
+        return {
+          answer: `Found ${overdueTasks.length} overdue task(s):\n${lines.join("\n")}`,
+          sources: overdueTasks.map((t) => ({ id: t.id, isTask: true })),
+        };
+      }
+
+      // 3. Retrieval scoring (TF + field boost across live tasks & PMO guides)
+      const scored = corpus.map((doc) => {
+        const docLower = doc.text.toLowerCase();
+        const docTokens = new Set(tokenize(doc.text));
+        let score = 0;
+
+        for (const tok of qTokens) {
+          if (docTokens.has(tok)) score += 3;
+          else if (docLower.includes(tok)) score += 1.5;
+        }
+
+        if (doc.type === "task") {
+          const t = doc.task;
+          if (qLower.includes(t.id.toLowerCase())) score += 20;
+          if (qLower.includes(t.status.toLowerCase())) score += 8;
+          if (qLower.includes(t.priority.toLowerCase())) score += 7;
+          if (qLower.includes(t.project.toLowerCase())) score += 8;
+          if (qLower.includes(t.category.toLowerCase())) score += 6;
+          if (qLower.includes(t.assignee.toLowerCase())) score += 10;
+          const nameParts = t.assignee.toLowerCase().split(/\s+/);
+          for (const part of nameParts) {
+            if (part.length > 2 && qTokens.includes(part)) score += 6;
+          }
+        }
+        return { doc, score };
+      });
+
+      const hits = scored
+        .filter((item) => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 4);
+
+      if (hits.length === 0) {
+        return {
+          answer:
+            "I couldn't find a matching task or PMO guide for that query. Try asking about overdue tasks, blocked items, a priority level (Critical/High), a workstream (e.g. Core Banking Upgrade), or an assignee (e.g. Daniel Lim).",
+          sources: [{ id: "PMO-GUIDE-ADD", isTask: false }],
+        };
+      }
+
+      const taskHits = hits.filter((h) => h.doc.type === "task").map((h) => h.doc.task);
+      const guideHits = hits.filter((h) => h.doc.type === "guide").map((h) => h.doc);
+
+      const parts = [];
+      if (taskHits.length > 0) {
+        parts.push(
+          `Retrieved ${taskHits.length} relevant task(s) from the live board:\n` +
+            taskHits
+              .map(
+                (t) =>
+                  `• ${t.id} — ${t.title}\n  Status: ${t.status} | Priority: ${t.priority} | Owner: ${t.assignee} | Due: ${t.dueDate}`
+              )
+              .join("\n")
+        );
+      }
+      if (guideHits.length > 0 && taskHits.length === 0) {
+        parts.push(guideHits.map((g) => `${g.title}: ${g.text}`).join("\n\n"));
+      }
+
+      const sources = [
+        ...taskHits.map((t) => ({ id: t.id, isTask: true })),
+        ...(taskHits.length === 0
+          ? guideHits.map((g) => ({ id: g.id, isTask: false }))
+          : []),
+      ];
+
+      return {
+        answer: parts.join("\n\n"),
+        sources,
+      };
+    }
+
+    function appendRagMessage(role, text, sources = []) {
+      const msgEl = document.createElement("div");
+      msgEl.className = `rag-msg rag-msg--${role}`;
+      msgEl.textContent = text;
+
+      if (role === "bot" && sources.length > 0) {
+        const srcWrap = document.createElement("div");
+        srcWrap.className = "rag-sources";
+        const label = document.createElement("span");
+        label.className = "rag-sources-label";
+        label.textContent = "Sources:";
+        srcWrap.appendChild(label);
+
+        for (const src of sources) {
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "rag-source-chip";
+          chip.textContent = src.id;
+          if (src.isTask) {
+            chip.title = `Highlight ${src.id} on board`;
+            chip.addEventListener("click", () => highlightTaskCard(src.id));
+          }
+          srcWrap.appendChild(chip);
+        }
+        msgEl.appendChild(srcWrap);
+      }
+
+      ragMessagesEl.appendChild(msgEl);
+      ragMessagesEl.scrollTop = ragMessagesEl.scrollHeight;
+    }
+
+    function highlightTaskCard(taskId) {
+      const card = boardEl.querySelector(`.task-card[data-task-id="${CSS.escape(taskId)}"]`);
+      if (!card) {
+        showToast(`Task ${taskId} is currently hidden by active filters.`, "info");
+        return;
+      }
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("task-card--highlight");
+      window.setTimeout(() => card.classList.remove("task-card--highlight"), 2200);
+    }
+
+    function openRagPanel() {
+      ragPanel.hidden = false;
+      ragLauncherWrap.classList.add("is-open");
+      ragAvatarBtn.setAttribute("aria-expanded", "true");
+
+      if (!ragInitialised) {
+        ragInitialised = true;
+        appendRagMessage(
+          "bot",
+          `${CHATBOT_VOICE_HOOK.voiceMessage}\n\nAsk me anything about the live Kanban board — overdue items, blockers, assignees, priorities, or workstreams.`
+        );
+      }
+
+      // Fire project chatbot-click voice hook
+      triggerChatbotVoiceHook();
+      ragInputEl.focus();
+    }
+
+    function closeRagPanel() {
+      ragPanel.hidden = true;
+      ragLauncherWrap.classList.remove("is-open");
+      ragAvatarBtn.setAttribute("aria-expanded", "false");
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    ragAvatarBtn.addEventListener("click", () => {
+      if (ragPanel.hidden) openRagPanel();
+      else closeRagPanel();
+    });
+
+    ragCloseBtn.addEventListener("click", closeRagPanel);
+
+    ragVoiceBtn.addEventListener("click", () => {
+      triggerChatbotVoiceHook();
+    });
+
+    ragQuickBarEl.addEventListener("click", (event) => {
+      const chip = event.target.closest("button[data-rag-query]");
+      if (!chip) return;
+      const query = chip.dataset.ragQuery;
+      appendRagMessage("user", query);
+      const result = runBoardRAG(query);
+      appendRagMessage("bot", result.answer, result.sources);
+    });
+
+    ragFormEl.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const query = ragInputEl.value.trim();
+      if (!query) return;
+      ragInputEl.value = "";
+      appendRagMessage("user", query);
+      const result = runBoardRAG(query);
+      appendRagMessage("bot", result.answer, result.sources);
+    });
+
+    /* ===================================================================
+       13. INITIALISE BOARD
        =================================================================== */
     dueDateInputEl.min = getTodayISO();
     renderBoard();
